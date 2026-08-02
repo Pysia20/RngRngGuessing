@@ -4,6 +4,8 @@ let streak = 0
 let mouseX = 0
 let mouseY = 0
 
+const confettiSound  = new Audio()
+
 const blocker = document.querySelector(".Blocker")
 
 const randOut = document.getElementById("TheNumber")
@@ -53,6 +55,7 @@ function guess(anwser) {
         streak += 1
         streakOut.innerHTML = "Streak: " + streak
         updateStyle(anwser)
+        spawnConfetti()
     } else {
         streak = 0
         streakOut.innerHTML = "Streakn't"
@@ -137,3 +140,76 @@ function proceed() {
     resetStyle()
     generate()
 }
+
+function spawnConfetti() {
+    const file = Math.floor(Math.random() * 10)
+    if (file <= 5) {
+        confettiSound.src = "assets/audio/confetti1.mp3"
+    } else if (file !== 9) {
+        confettiSound.src = "assets/audio/confetti3.mp3"
+    } else {
+        confettiSound.src = "assets/audio/confetti2.mp3"
+    }
+    confettiSound.load()
+    confettiSound.play()
+    confetti({
+        origin: { y: 1, x: 1 },
+        angle: 125,
+        particleCount: 200,
+        spread: 90,
+        drift: -0.75,
+        ticks: 100,
+        zIndex: 0
+    });
+    confetti({
+        origin: { y: 1, x: 0 },
+        angle: 55,
+        particleCount: 200,
+        spread: 90,
+        drift: 0.75,
+        ticks: 100,
+        zIndex: 0
+    });
+}
+
+/* SAVEs JUST IN CASE
+    FROM THE ANWSERS
+    confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.70, x: 0.33 },
+        angle: 130,
+        ticks: 250,
+        zIndex: 0,
+        drift: -0.75
+    });
+    confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.70, x: 0.66 },
+        angle: 50,
+        ticks: 250,
+        zIndex: 0,
+        drift: 0.75
+    });
+
+    FROM THE NUM
+    confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.32, x: 0.36 },
+        angle: 130,
+        ticks: 100,
+        zIndex: 0,
+        drift: -0.75
+    });
+    confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: { y: 0.32, x: 0.64 },
+        angle: 50,
+        ticks: 100,
+        zIndex: 0,
+        drift: 0.75
+    });
+ */
