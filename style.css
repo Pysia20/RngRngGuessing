@@ -23,6 +23,16 @@ p {
     color: white;
 }
 
+.Blocker {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 999;
+    display: none;
+
+    cursor: pointer;
+}
+
 .Streak {
     grid-column-start: 2;
     grid-column-end: 3;

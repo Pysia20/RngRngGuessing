@@ -9,24 +9,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="Blocker" onclick="proceed()"></div>
     <main>
         <div class="Streak">
-            <p>Streak: 000</p>
+            <p id="StreakNum">Streak: 000</p>
         </div>
         <div class="RNumber">
             <p id="TheNumber">000</p>
         </div>
         <div class="answers">
-            <div class="anwser" onclick="guess('Math')">
+            <div class="anwser" id="Math" onclick="guess('Math')">
                 <p>.Math</p>
             </div>
-            <div class="anwser" onclick="guess('Cursor')">
+            <div class="anwser" id="Cursor" onclick="guess('Cursor')">
                 <p>Cursor Pos</p>
             </div>
-            <div class="anwser" onclick="guess('Time')">
+            <div class="anwser" id="Time" onclick="guess('Time')">
                 <p>Time Based</p>
             </div>
-            <div class="anwser" onclick="guess('Prev')">
+            <div class="anwser" id="Prev" onclick="guess('Prev')">
                 <p>Previous Based</p>
             </div>
         </div>
