@@ -6,6 +6,7 @@ let mouseY = 0
 let britishController
 
 const confettiSound  = new Audio()
+const typeSound = new Audio()
 
 const blocker = document.querySelector(".Blocker")
 const narrator = document.querySelector(".Narrator")
@@ -225,14 +226,20 @@ function nextText() {
 
 class British_Controller {
     constructor() {
-        this.dialogues = ["test", "test2"]
-        this.current = "Hello FOOL"
+        this.dialogues = ["hello FOOL", "test", "test2"]
+        this.current = ""
 
         this.timeOuts = []
     }
 
+    add(text) {
+        this.dialogues.push(text)
+    }
+
     show() {
         narrator.style.display = "flex"
+        this.next()
+        this.spell()
     }
 
     hide() {
@@ -244,14 +251,20 @@ class British_Controller {
     }
 
     spell() {
-        this.clearTimeouts()
-        narratorText.innerHTML = ""
-        const toSpell = this.current
-        for (let i = 0; i < toSpell.length; i++) {
-            const timeout = setTimeout(() => {
-                narratorText.innerHTML += toSpell[i]
-            }, 140 * (i + 1))
-            this.timeOuts.push(timeout)
+        if (this.current) {
+            this.clearTimeouts()
+            narratorText.innerHTML = ""
+            const toSpell = this.current
+            for (let i = 0; i < toSpell.length; i++) {
+                const timeout = setTimeout(() => {
+                    narratorText.innerHTML += toSpell[i]
+                    typeSound.src = "assets/audio/writing" + ((i % 3) + 1) + ".mp3"
+                    typeSound.play()
+                }, 140 * (i + 1))
+                this.timeOuts.push(timeout)
+            }
+        } else {
+            this.hide()
         }
     }
 
