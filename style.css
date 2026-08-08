@@ -33,6 +33,28 @@ p {
     cursor: pointer;
 }
 
+.Narrator {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 999;
+
+    background-color: black;
+
+    font-family: Norican, serif;
+    font-size: 10rem;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Narrator p {
+    margin-bottom: 4rem;
+}
+
 .Streak {
     grid-column-start: 2;
     grid-column-end: 3;

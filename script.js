@@ -3,10 +3,12 @@ let num = 0
 let streak = 0
 let mouseX = 0
 let mouseY = 0
+let britishController
 
 const confettiSound  = new Audio()
 
 const blocker = document.querySelector(".Blocker")
+const narrator = document.querySelector(".Narrator")
 
 const randOut = document.getElementById("TheNumber")
 const streakOut = document.getElementById("StreakNum")
@@ -14,6 +16,7 @@ const mathDiv = document.getElementById("Math")
 const cursorDiv = document.getElementById("Cursor")
 const timeDiv = document.getElementById("Time")
 const prevDiv = document.getElementById("Prev")
+const narratorText = document.getElementById("NarratorText")
 
 document.addEventListener('mousemove', (event) => {
     mouseX = event.clientX
@@ -22,6 +25,7 @@ document.addEventListener('mousemove', (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     generate()
+    britishController = new British_Controller()
 })
 
 function generate() {
@@ -213,3 +217,48 @@ function spawnConfetti() {
         drift: 0.75
     });
  */
+
+function nextText() {
+    britishController.next()
+    britishController.spell()
+}
+
+class British_Controller {
+    constructor() {
+        this.dialogues = ["test", "test2"]
+        this.current = "Hello FOOL"
+
+        this.timeOuts = []
+    }
+
+    show() {
+        narrator.style.display = "flex"
+    }
+
+    hide() {
+        narrator.style.display = "none"
+    }
+
+    next() {
+        this.current = this.dialogues.shift()
+    }
+
+    spell() {
+        this.clearTimeouts()
+        narratorText.innerHTML = ""
+        const toSpell = this.current
+        for (let i = 0; i < toSpell.length; i++) {
+            const timeout = setTimeout(() => {
+                narratorText.innerHTML += toSpell[i]
+            }, 140 * (i + 1))
+            this.timeOuts.push(timeout)
+        }
+    }
+
+    clearTimeouts() {
+        for (const timeout of this.timeOuts) {
+            clearTimeout(timeout)
+        }
+        this.timeOuts = []
+    }
+}
