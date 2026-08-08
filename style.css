@@ -44,11 +44,16 @@ p {
     font-family: Norican, serif;
     font-size: 10rem;
 
+    transition: opacity 0.6s;
     cursor: pointer;
 
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.Narrator.Showing {
+    transition: opacity 0.25s;
 }
 
 .Narrator p {

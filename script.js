@@ -7,9 +7,16 @@ let britishController
 
 const confettiSound  = new Audio()
 const typeSound = new Audio()
+const hoverSound = new Audio("assets/audio/hover.mp3")
+const clickSound = new Audio("assets/audio/click.mp3")
+
+typeSound.volume = 0.75
+hoverSound.volume = 0.4
+clickSound.volume = 0.8
 
 const blocker = document.querySelector(".Blocker")
 const narrator = document.querySelector(".Narrator")
+const anwsers = document.querySelectorAll(".anwser")
 
 const randOut = document.getElementById("TheNumber")
 const streakOut = document.getElementById("StreakNum")
@@ -28,6 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
     generate()
     britishController = new British_Controller()
 })
+
+for (const anwser of anwsers) {
+    anwser.addEventListener("mouseenter", () => {
+        hoverSound.load()
+        hoverSound.play()
+    })
+}
+
 
 function generate() {
     const method = Math.floor(Math.random() * 4) //wait, it's all just math.random?  always has been.
@@ -61,7 +76,10 @@ function guess(anwser) {
         streakOut.innerHTML = "Streak: " + streak
         updateStyle(anwser)
         spawnConfetti()
+        britishController.add("test")
+        britishController.show()
     } else {
+        clickSound.play()
         streak = 0
         streakOut.innerHTML = "Streakn't"
         updateStyle(anwser)
@@ -226,7 +244,7 @@ function nextText() {
 
 class British_Controller {
     constructor() {
-        this.dialogues = ["hello FOOL", "test", "test2"]
+        this.dialogues = ["welcome FOOL", "thy shall guess my rngs", "NOW"]
         this.current = ""
 
         this.timeOuts = []
@@ -238,12 +256,20 @@ class British_Controller {
 
     show() {
         narrator.style.display = "flex"
+        narrator.classList.add("Showing")
+        setTimeout(() => {
+            narrator.style.opacity = 1
+        }, 1)
         this.next()
         this.spell()
     }
 
     hide() {
-        narrator.style.display = "none"
+        narrator.classList.remove("Showing")
+        narrator.style.opacity = 0
+        setTimeout(() => {
+            narrator.style.display = "none"
+        }, 500)
     }
 
     next() {
@@ -258,9 +284,11 @@ class British_Controller {
             for (let i = 0; i < toSpell.length; i++) {
                 const timeout = setTimeout(() => {
                     narratorText.innerHTML += toSpell[i]
-                    typeSound.src = "assets/audio/writing" + ((i % 3) + 1) + ".mp3"
-                    typeSound.play()
-                }, 140 * (i + 1))
+                    if (toSpell[i] !== " ") {
+                        typeSound.src = "assets/audio/writing" + ((i % 3) + 1) + ".mp3"
+                        typeSound.play()
+                    }
+                }, 150 * (i + 1))
                 this.timeOuts.push(timeout)
             }
         } else {
