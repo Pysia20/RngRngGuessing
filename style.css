@@ -68,7 +68,11 @@ p {
 
     font-size: 2rem;
     font-weight: normal;
-    -webkit-text-stroke: 0.02em black;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px  1px 0 #000,
+            1px  1px 0 #000;
 
     display: flex;
     justify-content: center;
@@ -97,7 +101,11 @@ p {
 
     font-size: min(14.5cqw,27cqh);
     font-weight: bold;
-    -webkit-text-stroke: 0.02em black;
+    text-shadow:
+            -4px -4px 0 #000,
+            4px -4px 0 #000,
+            -4px  4px 0 #000,
+            4px  4px 0 #000;
 
     display: flex;
     justify-content: center;
@@ -129,7 +137,11 @@ p {
     text-align: center;
     font-size: min(1.75cqw,4cqh);
     font-weight: bold;
-    -webkit-text-stroke: 0.02em black;
+    text-shadow:
+            -2px -2px 0 #000,
+            2px -2px 0 #000,
+            -2px  2px 0 #000,
+            2px  2px 0 #000;
 
     cursor: pointer;
     transition: opacity 0.5s, background-color 0.5s, transform 0.3s;
