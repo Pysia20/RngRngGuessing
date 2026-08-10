@@ -60,6 +60,28 @@ p {
     margin-bottom: 4rem;
 }
 
+.Narrator {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 999;
+
+    background-color: black;
+
+    font-family: Norican, serif;
+    font-size: 10rem;
+
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Narrator p {
+    margin-bottom: 4rem;
+}
+
 .Streak {
     grid-column-start: 2;
     grid-column-end: 3;
@@ -95,7 +117,7 @@ p {
     height: 100%;
 
     overflow: hidden;
-    background-color: rgb(0 0 0 / 0.5);
+    background-color: #72461B;
     filter: drop-shadow(-5px 4px 8px rgba(0, 0, 0, 0.65));
     border-radius: 24px;
 
@@ -127,11 +149,10 @@ p {
     width: 20%;
     aspect-ratio: 1;
     margin-bottom: 15%;
+    position: relative;
     z-index: 1;
 
-    overflow: hidden;
-    background-color: rgb(0 0 0 / 0.5);
-    filter: drop-shadow(-5px 4px 8px rgba(0, 0, 0, 0.55));
+    /*overflow: hidden;*/
     border-radius: 24px;
 
     text-align: center;
@@ -152,16 +173,54 @@ p {
     align-items: center;
 }
 
+.anwser:before {
+    content: '';
+    position: absolute;
+    inset: 0; /* Stretches exactly to the edges of .anwser */
+    border-radius: inherit; /* Inherits the 24px curve */
+    background-color: #72461B;
+    filter: drop-shadow(-5px 4px 8px rgba(0, 0, 0, 0.55));
+
+    z-index: -1; /* Put the background behind the text... */
+    transition: background-color 0.5s;
+}
+
 .anwser:hover {
     transform: scale(1.05);
 }
 
-.wrong {
-    background-color: rgb(255 0 0 / 0.5);
+.arrow {
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    z-index: -2;
 }
 
-.correct {
-    background-color: rgb(0 255 47 / 0.5);
+.anwser:hover .arrow {
+    opacity: 1;
+    transform: translateY(100%);
+}
+
+.code {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    bottom: -75%;
+    transition: opacity 1s, visibility 1s;
+}
+
+.arrow:hover ~ .code {
+    visibility: visible;
+    opacity: 1;
+}
+
+.anwser.wrong:before {
+    background-color: #D61809;
+}
+
+.anwser.correct:before {
+    background-color: #27C728;
 }
 
 .unimportant {
