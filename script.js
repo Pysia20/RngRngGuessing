@@ -3,7 +3,8 @@ let num = 0
 let streak = 0
 let mouseX = 0
 let mouseY = 0
-let britishController
+let britishController = false
+let regenerated = false
 
 const confettiSound  = new Audio()
 const typeSound = new Audio()
@@ -70,14 +71,40 @@ function generate() {
     randOut.innerHTML = num
 }
 
+function regenerate() {
+    if (!regenerated) {
+        britishController.changeSpeed(100)
+        britishController.add("This thingamajig alloweth thee to regenerate the tally using the selfsame fashion.")
+        britishController.add("But why art thou regenerating!?")
+        britishController.add("I deem thee cheat!!!!1!")
+        britishController.show()
+        regenerated = true
+    }
+    switch (correct) {
+        case "Math":
+            num = Math.floor(Math.random() * 1000)
+            break
+        case "Cursor":
+            num = (mouseX * mouseY) % 1000
+            break
+        case "Time":
+            num = Date.now() % 1000
+            break
+        case "Prev":
+            num = Math.pow(num, 4) % 1000
+            break
+        default:
+            console.log("regenerate err")
+    }
+    randOut.innerHTML = num
+}
+
 function guess(anwser) {
     if (anwser === correct) {
         streak += 1
         streakOut.innerHTML = "Streak: " + streak
         updateStyle(anwser)
         spawnConfetti()
-        britishController.add("test")
-        britishController.show()
     } else {
         clickSound.play()
         streak = 0
@@ -244,8 +271,9 @@ function nextText() {
 
 class British_Controller {
     constructor() {
-        this.dialogues = ["welcome FOOL", "thy shall guess my rngs", "NOW"]
+        this.dialogues = ["Welcome, THOU UTTER FOOL!", "Thou shalt guess my RNGs!", "NOWTH"]
         this.current = ""
+        this.speed = 140
 
         this.timeOuts = []
     }
@@ -288,7 +316,7 @@ class British_Controller {
                         typeSound.src = "assets/audio/writing" + ((i % 3) + 1) + ".mp3"
                         typeSound.play()
                     }
-                }, 150 * (i + 1))
+                }, this.speed * (i + 1))
                 this.timeOuts.push(timeout)
             }
         } else {
@@ -301,5 +329,9 @@ class British_Controller {
             clearTimeout(timeout)
         }
         this.timeOuts = []
+    }
+
+    changeSpeed(num) {
+        this.speed = num
     }
 }

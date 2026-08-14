@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Norican&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Norican&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,31 +14,31 @@
     <div class="Narrator" onclick="nextText()"><p id="NarratorText">...</p></div>
     <main>
         <div class="Streak">
-            <p id="StreakNum">Streak: 000</p>
+            <p id="StreakNum">Streakn't</p>
         </div>
-        <div class="RNumber">
+        <div class="RNumber" onclick="regenerate()">
             <p id="TheNumber">000</p>
         </div>
         <div class="answers">
             <div class="anwser" id="Math" onclick="guess('Math')">
                 <p>.Math</p>
                 <div class="arrow">\/</div>
-                <div class="code">BLABLABLA</div>
+                <div class="code"><p>Math.floor(Math.random() * 1000)</p></div>
             </div>
             <div class="anwser" id="Cursor" onclick="guess('Cursor')">
                 <p>Cursor Pos</p>
                 <div class="arrow">\/</div>
-                <div class="code">BLABLABLA</div>
+                <div class="code"><p>(mouseX * mouseY) % 1000</p></div>
             </div>
             <div class="anwser" id="Time" onclick="guess('Time')">
                 <p>Time Based</p>
                 <div class="arrow">\/</div>
-                <div class="code">BLABLABLA</div>
+                <div class="code"><p>Date.now() % 1000</p></div>
             </div>
             <div class="anwser" id="Prev" onclick="guess('Prev')">
                 <p>Previous Based</p>
                 <div class="arrow">\/</div>
-                <div class="code">BLABLABLA</div>
+                <div class="code"><p>Math.pow(previousNum, 4) % 1000</p></div>
             </div>
         </div>
     </main>

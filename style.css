@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
 
-    font-family: Inter, sans-serif;
+    font-family: Chewy, sans-serif;
 }
 
 main {
@@ -42,7 +42,7 @@ p {
     background-color: black;
 
     font-family: Norican, serif;
-    font-size: 10rem;
+    font-size: 10vw;
 
     transition: opacity 0.6s;
     cursor: pointer;
@@ -57,29 +57,8 @@ p {
 }
 
 .Narrator p {
-    margin-bottom: 4rem;
-}
-
-.Narrator {
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    z-index: 999;
-
-    background-color: black;
-
-    font-family: Norican, serif;
-    font-size: 10rem;
-
-    cursor: pointer;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.Narrator p {
-    margin-bottom: 4rem;
+    text-align: center;
+    max-width: 90vw;
 }
 
 .Streak {
@@ -107,6 +86,8 @@ p {
     grid-row-start: 2;
     grid-row-end: 3;
 
+    cursor: pointer;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,7 +102,8 @@ p {
     filter: drop-shadow(-5px 4px 8px rgba(0, 0, 0, 0.65));
     border-radius: 24px;
 
-    font-size: min(14.5cqw,27cqh);
+    letter-spacing: 0.05em;
+    font-size: min(13cqw,25cqh);
     font-weight: bold;
     text-shadow:
             -4px -4px 0 #000,
@@ -174,14 +156,14 @@ p {
 }
 
 .anwser:before {
-    content: '';
     position: absolute;
-    inset: 0; /* Stretches exactly to the edges of .anwser */
-    border-radius: inherit; /* Inherits the 24px curve */
+    z-index: -1;
+    inset: 0;
+
+    border-radius: inherit;
     background-color: #72461B;
     filter: drop-shadow(-5px 4px 8px rgba(0, 0, 0, 0.55));
-
-    z-index: -1; /* Put the background behind the text... */
+    content: '';
     transition: background-color 0.5s;
 }
 
@@ -189,12 +171,19 @@ p {
     transform: scale(1.05);
 }
 
+.anwser p {
+    will-change: transform;
+}
+
 .arrow {
     position: absolute;
     bottom: 0;
+    z-index: -2;
+
+    cursor: help;
+
     opacity: 0;
     transition: opacity 0.5s, transform 0.5s;
-    z-index: -2;
 }
 
 .anwser:hover .arrow {
@@ -204,10 +193,29 @@ p {
 
 .code {
     position: absolute;
+    width: 300%;
+    height: 50%;
+    bottom: -75%;
+
+    font-size: 70%;
+
     opacity: 0;
     visibility: hidden;
-    bottom: -75%;
     transition: opacity 1s, visibility 1s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code p {
+    background-color: #000000;
+    padding: 0.5em;
+    border-radius: 16px;
+
+    font-family: Inter, sans-serif;
+    text-shadow: none;
+    color: #00FF04;
 }
 
 .arrow:hover ~ .code {
