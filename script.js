@@ -1,10 +1,13 @@
 let correct = ""
 let num = 0
 let streak = 0
+let highScore = 0
 let mouseX = 0
 let mouseY = 0
 let britishController = false
+let welcomeText = false
 let regenerated = false
+let tipGiven = false
 
 const confettiSound  = new Audio()
 const typeSound = new Audio()
@@ -21,11 +24,37 @@ const anwsers = document.querySelectorAll(".anwser")
 
 const randOut = document.getElementById("TheNumber")
 const streakOut = document.getElementById("StreakNum")
+const highOut = document.getElementById("HighscoreNum")
 const mathDiv = document.getElementById("Math")
 const cursorDiv = document.getElementById("Cursor")
 const timeDiv = document.getElementById("Time")
 const prevDiv = document.getElementById("Prev")
 const narratorText = document.getElementById("NarratorText")
+
+function loadHighScore() {
+    const tempScore = parseInt(localStorage.getItem("RNGsHighScore"))
+    const didTutorials = localStorage.getItem("RNGsTutorials")
+    if (tempScore) {
+        highScore = tempScore
+    }
+    if (didTutorials) {
+        tipGiven = true
+        regenerated = true
+        welcomeText = true
+    }
+    highOut.innerHTML = "High-score: " + highScore
+}
+
+function updateHighScore() {
+    if (streak > highScore) {
+        highScore = streak
+        localStorage.setItem("RNGsHighScore", highScore)
+        highOut.innerHTML = "High-score: " + highScore
+        if (tipGiven && regenerated && welcomeText) {
+            localStorage.setItem("RNGsTutorials", "yup")
+        }
+    }
+}
 
 document.addEventListener('mousemove', (event) => {
     mouseX = event.clientX
@@ -33,8 +62,15 @@ document.addEventListener('mousemove', (event) => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
+    loadHighScore()
     generate()
-    britishController = new British_Controller()
+    if (!welcomeText) {
+        britishController = new British_Controller(["Welcome, THOU UTTER FOOL!", "Thou shalt guess my RNGs!", "NOWTH"])
+    } else {
+        britishController = new British_Controller(["Welcome back, my little fool!"])
+        britishController.changeSpeed(100)
+    }
+    welcomeText = true
 })
 
 for (const anwser of anwsers) {
@@ -112,6 +148,44 @@ function guess(anwser) {
         updateStyle(anwser)
     }
     blocker.style.display = "block"
+    updateHighScore()
+}
+
+function giveTip(type) {
+    britishController.changeSpeed(100)
+    if (!tipGiven) {
+        britishController.changeSpeed(100)
+        britishController.add("FOUL, STINKING CHEAT!!");
+        britishController.add("...")
+        britishController.add("but if thine unworthy self must know, behold how mine RNGs functioneth!");
+        tipGiven = true
+    }
+    switch (type) {
+        case "Math":
+            britishController.add(".Random is a function of the Math library.")
+            britishController.add("In other words its pretty much just random.")
+            britishController.add("Good luck.")
+            britishController.show()
+            break
+        case "Cursor":
+            britishController.add("This one uses the positions of your cursor")
+            britishController.add("Position X(up and down): " + mouseX + " and Y(left and right): " + mouseY)
+            britishController.add("Its its the easiest one to guess correctly if you just click refresh")
+            britishController.show()
+            break
+        case "Time":
+            britishController.add("This one's a bit weird")
+            britishController.add("Date.now() doesn't return the current date, time, etc.")
+            britishController.add("It returns the amount of milliseconds that passed since January 1, 1970")
+            britishController.show()
+            break
+        case "Prev":
+            britishController.add("This one just uses the previous number")
+            britishController.show()
+            break
+        default:
+            console.log("Tip err")
+    }
 }
 
 function updateStyle(anwser) {
@@ -270,8 +344,8 @@ function nextText() {
 }
 
 class British_Controller {
-    constructor() {
-        this.dialogues = ["Welcome, THOU UTTER FOOL!", "Thou shalt guess my RNGs!", "NOWTH"]
+    constructor(dialogues) {
+        this.dialogues = dialogues
         this.current = ""
         this.speed = 140
 

@@ -15,29 +15,30 @@
     <main>
         <div class="Streak">
             <p id="StreakNum">Streakn't</p>
+            <p id="HighscoreNum">Highscoren't</p>
         </div>
-        <div class="RNumber" onclick="regenerate()">
-            <p id="TheNumber">000</p>
+        <div class="RNumber">
+            <p id="TheNumber" onclick="regenerate()">000</p>
         </div>
         <div class="answers">
             <div class="anwser" id="Math" onclick="guess('Math')">
-                <p>.Math</p>
-                <div class="arrow">\/</div>
+                <p>.random()</p>
+                <div class="arrow"><p onclick="giveTip('Math')">\/</p></div>
                 <div class="code"><p>Math.floor(Math.random() * 1000)</p></div>
             </div>
             <div class="anwser" id="Cursor" onclick="guess('Cursor')">
                 <p>Cursor Pos</p>
-                <div class="arrow">\/</div>
+                <div class="arrow"><p onclick="giveTip('Cursor')">\/</p></div>
                 <div class="code"><p>(mouseX * mouseY) % 1000</p></div>
             </div>
             <div class="anwser" id="Time" onclick="guess('Time')">
                 <p>Time Based</p>
-                <div class="arrow">\/</div>
+                <div class="arrow"><p onclick="giveTip('Time')">\/</p></div>
                 <div class="code"><p>Date.now() % 1000</p></div>
             </div>
-            <div class="anwser" id="Prev" onclick="guess('Prev')">
-                <p>Previous Based</p>
-                <div class="arrow">\/</div>
+            <div class="anwser" id="Prev" >
+                <p onclick="guess('Prev')">Previous Based</p>
+                <div class="arrow"><p onclick="giveTip('Prev')">\/</p></div>
                 <div class="code"><p>Math.pow(previousNum, 4) % 1000</p></div>
             </div>
         </div>
