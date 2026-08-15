@@ -257,3 +257,20 @@ p {
 .unimportant {
     opacity: 20%;
 }
+
+.Settings {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.Trash {
+    margin: 1rem;
+
+    cursor:  pointer;
+}

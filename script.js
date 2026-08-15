@@ -8,6 +8,7 @@ let britishController = false
 let welcomeText = false
 let regenerated = false
 let tipGiven = false
+let resetProgressConfirmations = 0
 
 const confettiSound  = new Audio()
 const typeSound = new Audio()
@@ -53,6 +54,38 @@ function updateHighScore() {
         if (tipGiven && regenerated && welcomeText) {
             localStorage.setItem("RNGsTutorials", "yup")
         }
+    }
+}
+
+function resetProgress() {
+    switch (resetProgressConfirmations) {
+        case 0:
+            britishController.add("Thou shalt annihilate thy save data!")
+            britishController.add("Art thou truly sure?!")
+            britishController.show()
+            resetProgressConfirmations++
+            setTimeout(() => {
+                resetProgressConfirmations = 0
+            }, 20000)
+            break
+        case 1:
+            britishController.add("No but like fr.")
+            britishController.add("This will delete your save!")
+            britishController.show()
+            resetProgressConfirmations++
+            break
+        case 2:
+            britishController.add("Click one more time to confirm delete")
+            britishController.show()
+            resetProgressConfirmations++
+            break
+        case 3:
+            localStorage.removeItem("RNGsTutorials")
+            localStorage.removeItem("RNGsHighScore")
+            location.reload()
+            break
+        default:
+            console.log("generate err")
     }
 }
 
@@ -162,25 +195,26 @@ function giveTip(type) {
     }
     switch (type) {
         case "Math":
-            britishController.add(".Random is a function of the Math library.")
-            britishController.add("In other words its pretty much just random.")
+            britishController.add(".random() is a function of the Math library.")
+            britishController.add("In other words, it's pretty much just random.")
             britishController.add("Good luck.")
             britishController.show()
             break
         case "Cursor":
-            britishController.add("This one uses the positions of your cursor")
-            britishController.add("Position X(up and down): " + mouseX + " and Y(left and right): " + mouseY)
-            britishController.add("Its its the easiest one to guess correctly if you just click refresh")
+            britishController.add("This one uses the position of your cursor.")
+            britishController.add("Position X (left and right): " + mouseX + " and Y (up and down): " + mouseY)
+            britishController.add("It's the easiest one to guess correctly if you just click refresh.")
             britishController.show()
             break
         case "Time":
-            britishController.add("This one's a bit weird")
-            britishController.add("Date.now() doesn't return the current date, time, etc.")
-            britishController.add("It returns the amount of milliseconds that passed since January 1, 1970")
+            britishController.add("This one's a bit weird.")
+            britishController.add("Date.now() doesn't return the formatted date or time.")
+            britishController.add("It returns the number of milliseconds that have passed since January 1, 1970.")
             britishController.show()
             break
         case "Prev":
-            britishController.add("This one just uses the previous number")
+            britishController.add("This one just uses the previous number.")
+            britishController.add("It's also pretty easy to guess if you use refresh and sometimes even obvious without it.")
             britishController.show()
             break
         default:
