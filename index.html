@@ -10,40 +10,44 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="Blocker" onclick="proceed()"></div>
-    <div class="Narrator" onclick="nextText()"><p id="NarratorText">...</p></div>
+    <div class="Blocker" onclick="proceed()" title="Click for next round"></div>
+    <div class="Narrator" onclick="nextText()" title="Click to proceed"><p id="NarratorText">...</p></div>
     <main>
         <div class="Streak">
             <p id="StreakNum">Streakn't</p>
             <p id="HighscoreNum">Highscoren't</p>
         </div>
         <div class="RNumber">
-            <p id="TheNumber" onclick="regenerate()">000</p>
+            <p id="TheNumber" onclick="regenerate()" title="Regenerate">000</p>
         </div>
         <div class="answers">
             <div class="anwser" id="Math" onclick="guess('Math')">
                 <p>.random()</p>
-                <div class="arrow"><p onclick="giveTip('Math')">\/</p></div>
+                <div class="arrow" title="More info"><p onclick="giveTip('Math')">\/</p></div>
                 <div class="code"><p>Math.floor(Math.random() * 1000)</p></div>
             </div>
             <div class="anwser" id="Cursor" onclick="guess('Cursor')">
                 <p>Cursor Pos</p>
-                <div class="arrow"><p onclick="giveTip('Cursor')">\/</p></div>
+                <div class="arrow" title="More info"><p onclick="giveTip('Cursor')">\/</p></div>
                 <div class="code"><p>(mouseX * mouseY) % 1000</p></div>
             </div>
             <div class="anwser" id="Time" onclick="guess('Time')">
                 <p>Time Based</p>
-                <div class="arrow"><p onclick="giveTip('Time')">\/</p></div>
+                <div class="arrow" title="More info"><p onclick="giveTip('Time')">\/</p></div>
                 <div class="code"><p>Date.now() % 1000</p></div>
             </div>
             <div class="anwser" id="Prev" >
                 <p onclick="guess('Prev')">Previous Based</p>
-                <div class="arrow"><p onclick="giveTip('Prev')">\/</p></div>
+                <div class="arrow" title="More info"><p onclick="giveTip('Prev')">\/</p></div>
                 <div class="code"><p>Math.pow(previousNum, 4) % 1000</p></div>
             </div>
         </div>
         <div class="Settings">
-            <div class="Trash" onclick="resetProgress()">X</div>
+            <div class="VolumeSetting" >
+                <div class="VolumeSlider hidden"><input type="range" name="volume" id="volumeSlider" onchange="updateVolume()"></div>
+                <div class="VolumeButton"><label for="volumeSlider" onclick="toggleSlider()">X</label></div>
+            </div>
+            <div class="Trash" onclick="resetProgress()" title="Reset Progress"><img src="assets/imgs/trash.png" alt="X"></div>
         </div>
     </main>
 <script src="script.js"></script>

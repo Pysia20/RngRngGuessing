@@ -1,3 +1,10 @@
+/*
+ _._     _,-'""`-._
+(,-.`._,'(       |\`-/|
+    `-.-' \ )-`( , o o)
+          `-    \`_`"'-
+*/
+
 let correct = ""
 let num = 0
 let streak = 0
@@ -21,6 +28,7 @@ clickSound.volume = 0.8
 
 const blocker = document.querySelector(".Blocker")
 const narrator = document.querySelector(".Narrator")
+const volumeDiv = document.querySelector(".VolumeSlider")
 const anwsers = document.querySelectorAll(".anwser")
 
 const randOut = document.getElementById("TheNumber")
@@ -86,6 +94,14 @@ function resetProgress() {
             break
         default:
             console.log("generate err")
+    }
+}
+
+function toggleSlider() {
+    if (volumeDiv.classList.contains("hidden")) {
+        volumeDiv.classList.replace("hidden", "shown")
+    } else {
+        volumeDiv.classList.replace("shown", "hidden")
     }
 }
 
