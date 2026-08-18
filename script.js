@@ -22,6 +22,7 @@ const typeSound = new Audio()
 const hoverSound = new Audio("assets/audio/hover.mp3")
 const clickSound = new Audio("assets/audio/click.mp3")
 
+confettiSound.volume =  1.0
 typeSound.volume = 0.75
 hoverSound.volume = 0.4
 clickSound.volume = 0.8
@@ -29,6 +30,7 @@ clickSound.volume = 0.8
 const blocker = document.querySelector(".Blocker")
 const narrator = document.querySelector(".Narrator")
 const volumeDiv = document.querySelector(".VolumeSlider")
+const typingDiv = document.querySelector(".TypingSlider")
 const anwsers = document.querySelectorAll(".anwser")
 
 const randOut = document.getElementById("TheNumber")
@@ -97,12 +99,45 @@ function resetProgress() {
     }
 }
 
-function toggleSlider() {
-    if (volumeDiv.classList.contains("hidden")) {
-        volumeDiv.classList.replace("hidden", "shown")
-    } else {
-        volumeDiv.classList.replace("shown", "hidden")
+function toggleSlider(slider) {
+    switch (slider) {
+        case 0:
+            if (volumeDiv.classList.contains("shown")) {
+                volumeDiv.classList.replace("shown", "hidden")
+            }
+
+            if (typingDiv.classList.contains("hidden")) {
+                typingDiv.classList.replace("hidden", "shown")
+            } else {
+                typingDiv.classList.replace("shown", "hidden")
+            }
+            break
+        case 1:
+            if (typingDiv.classList.contains("shown")) {
+                typingDiv.classList.replace("shown", "hidden")
+            }
+
+            if (volumeDiv.classList.contains("hidden")) {
+                volumeDiv.classList.replace("hidden", "shown")
+            } else {
+                volumeDiv.classList.replace("shown", "hidden")
+            }
+            break
+        default:
+            console.log("toggle err")
     }
+}
+
+function updateVolume(volume) {
+    typeSound.volume = 0.75 * volume
+    hoverSound.volume = 0.4 * volume
+    clickSound.volume = 0.8 * volume
+    confettiSound.volume = 1.0  * volume
+}
+
+function updateTyping(speed) {
+    speed = 2.25 - speed
+    britishController.changeSpeed(100 * speed)
 }
 
 document.addEventListener('mousemove', (event) => {
@@ -117,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         britishController = new British_Controller(["Welcome, THOU UTTER FOOL!", "Thou shalt guess my RNGs!", "NOWTH"])
     } else {
         britishController = new British_Controller(["Welcome back, my little fool!"])
-        britishController.changeSpeed(100)
     }
     welcomeText = true
 })
@@ -158,7 +192,6 @@ function generate() {
 
 function regenerate() {
     if (!regenerated) {
-        britishController.changeSpeed(100)
         britishController.add("This thingamajig alloweth thee to regenerate the tally using the selfsame fashion.")
         britishController.add("But why art thou regenerating!?")
         britishController.add("I deem thee cheat!!!!1!")
@@ -201,9 +234,7 @@ function guess(anwser) {
 }
 
 function giveTip(type) {
-    britishController.changeSpeed(100)
     if (!tipGiven) {
-        britishController.changeSpeed(100)
         britishController.add("FOUL, STINKING CHEAT!!");
         britishController.add("...")
         britishController.add("but if thine unworthy self must know, behold how mine RNGs functioneth!");

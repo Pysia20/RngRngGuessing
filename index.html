@@ -43,9 +43,13 @@
             </div>
         </div>
         <div class="Settings">
-            <div class="VolumeSetting" >
-                <div class="VolumeSlider hidden"><input type="range" name="volume" id="volumeSlider" onchange="updateVolume()"></div>
-                <div class="VolumeButton"><label for="volumeSlider" onclick="toggleSlider()">X</label></div>
+            <div class="TypingSetting">
+                <div class="TypingSlider hidden"><input type="range" name="typing" id="typingSlider" onchange="updateTyping(this.value)" max="2" min="0.5" step="0.05" value="1"></div>
+                <div class="TypingButton"><label for="typingSlider" onclick="toggleSlider(0)"><img src="assets/imgs/speaker.png" alt="S"></label></div>
+            </div>
+            <div class="VolumeSetting">
+                <div class="VolumeSlider hidden"><input type="range" name="volume" id="volumeSlider" onchange="updateVolume(this.value)" max="1" min="0" step="0.01" value="1"></div>
+                <div class="VolumeButton"><label for="volumeSlider" onclick="toggleSlider(1)"><img src="assets/imgs/speaker.png" alt="S"></label></div>
             </div>
             <div class="Trash" onclick="resetProgress()" title="Reset Progress"><img src="assets/imgs/trash.png" alt="X"></div>
         </div>
