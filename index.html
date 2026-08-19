@@ -10,50 +10,53 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="Blocker" onclick="proceed()" title="Click for next round"></div>
-    <div class="Narrator" onclick="nextText()" title="Click to proceed"><p id="NarratorText">...</p></div>
-    <main>
-        <div class="Streak">
-            <p id="StreakNum">Streakn't</p>
-            <p id="HighscoreNum">Highscoren't</p>
+<div class="Blocker" onclick="proceed()" title="Click for next round"></div>
+<div class="Narrator" onclick="nextText()" title="Click to proceed"><p id="NarratorText">...</p></div>
+<main>
+    <div class="Streak">
+        <p id="StreakNum">Streakn't</p>
+        <p id="HighscoreNum">Highscoren't</p>
+    </div>
+    <div class="RNumber">
+        <p id="TheNumber" onclick="regenerate()" title="Regenerate">000</p>
+    </div>
+    <div class="answers">
+        <div class="anwser" id="Math" onclick="guess('Math')">
+            <p>.random()</p>
+            <div class="arrow" title="More info"><p onclick="giveTip(event, 'Math')">\/</p></div>
+            <div class="code"><p>Math.floor(Math.random() * 1000)</p></div>
         </div>
-        <div class="RNumber">
-            <p id="TheNumber" onclick="regenerate()" title="Regenerate">000</p>
+        <div class="anwser" id="Cursor" onclick="guess('Cursor')">
+            <p>Cursor Pos</p>
+            <div class="arrow" title="More info"><p onclick="giveTip(event, 'Cursor')">\/</p></div>
+            <div class="code"><p>(mouseX * mouseY) % 1000</p></div>
         </div>
-        <div class="answers">
-            <div class="anwser" id="Math" onclick="guess('Math')">
-                <p>.random()</p>
-                <div class="arrow" title="More info"><p onclick="giveTip('Math')">\/</p></div>
-                <div class="code"><p>Math.floor(Math.random() * 1000)</p></div>
-            </div>
-            <div class="anwser" id="Cursor" onclick="guess('Cursor')">
-                <p>Cursor Pos</p>
-                <div class="arrow" title="More info"><p onclick="giveTip('Cursor')">\/</p></div>
-                <div class="code"><p>(mouseX * mouseY) % 1000</p></div>
-            </div>
-            <div class="anwser" id="Time" onclick="guess('Time')">
-                <p>Time Based</p>
-                <div class="arrow" title="More info"><p onclick="giveTip('Time')">\/</p></div>
-                <div class="code"><p>Date.now() % 1000</p></div>
-            </div>
-            <div class="anwser" id="Prev" >
-                <p onclick="guess('Prev')">Previous Based</p>
-                <div class="arrow" title="More info"><p onclick="giveTip('Prev')">\/</p></div>
-                <div class="code"><p>Math.pow(previousNum, 4) % 1000</p></div>
-            </div>
+        <div class="anwser" id="Time" onclick="guess('Time')">
+            <p>Time Based</p>
+            <div class="arrow" title="More info"><p onclick="giveTip(event, 'Time')">\/</p></div>
+            <div class="code"><p>Date.now() % 1000</p></div>
         </div>
-        <div class="Settings">
-            <div class="TypingSetting">
-                <div class="TypingSlider hidden"><input type="range" name="typing" id="typingSlider" onchange="updateTyping(this.value)" max="2" min="0.5" step="0.05" value="1"></div>
-                <div class="TypingButton"><label for="typingSlider" onclick="toggleSlider(0)"><img src="assets/imgs/speaker.png" alt="S"></label></div>
-            </div>
-            <div class="VolumeSetting">
-                <div class="VolumeSlider hidden"><input type="range" name="volume" id="volumeSlider" onchange="updateVolume(this.value)" max="1" min="0" step="0.01" value="1"></div>
-                <div class="VolumeButton"><label for="volumeSlider" onclick="toggleSlider(1)"><img src="assets/imgs/speaker.png" alt="S"></label></div>
-            </div>
-            <div class="Trash" onclick="resetProgress()" title="Reset Progress"><img src="assets/imgs/trash.png" alt="X"></div>
+        <div class="anwser" id="Prev" onclick="guess('Prev')">
+            <p>Previous Based</p>
+            <div class="arrow" title="More info"><p onclick="giveTip(event, 'Prev')">\/</p></div>
+            <div class="code"><p>Math.pow(previousNum, 4) % 1000</p></div>
         </div>
-    </main>
+    </div>
+    <div class="Settings">
+        <div class="Setting" title="Change typing speed">
+            <div class="Slider hidden" id="TypingSlider"><input type="range" name="typing" id="typingSliderInput" onchange="updateTyping(this.value)" max="2" min="0.5" step="0.05" value="1"></div>
+            <div class="ShowButton"><label for="typingSliderInput" onclick="toggleSlider(0)"><img src="assets/imgs/typing.png" alt="T"></label></div>
+        </div>
+        <div class="Setting" title="Change volume">
+            <div class="Slider hidden" id="VolumeSlider"><input type="range" name="volume" id="volumeSliderInput" onchange="updateVolume(this.value)" max="1" min="0" step="0.01" value="1"></div>
+            <div class="ShowButton"><label for="volumeSliderInput" onclick="toggleSlider(1)"><img src="assets/imgs/speaker3.png" alt="S"></label></div>
+        </div>
+        <div class="Setting" onclick="resetProgress()" title="Reset Progress"><img src="assets/imgs/trash.png" alt="X"></div>
+    </div>
+    <div class="Links">
+        <a href="DoesntExistYetSorry.html" title="My main site"><p>Take me away</p></a>
+    </div>
+</main>
 <script src="script.js"></script>
 </body>
 </html>

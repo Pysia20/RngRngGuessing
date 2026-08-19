@@ -29,8 +29,6 @@ clickSound.volume = 0.8
 
 const blocker = document.querySelector(".Blocker")
 const narrator = document.querySelector(".Narrator")
-const volumeDiv = document.querySelector(".VolumeSlider")
-const typingDiv = document.querySelector(".TypingSlider")
 const anwsers = document.querySelectorAll(".anwser")
 
 const randOut = document.getElementById("TheNumber")
@@ -41,6 +39,8 @@ const cursorDiv = document.getElementById("Cursor")
 const timeDiv = document.getElementById("Time")
 const prevDiv = document.getElementById("Prev")
 const narratorText = document.getElementById("NarratorText")
+const typingDiv = document.getElementById("TypingSlider")
+const volumeDiv = document.getElementById("VolumeSlider")
 
 function loadHighScore() {
     const tempScore = parseInt(localStorage.getItem("RNGsHighScore"))
@@ -233,7 +233,8 @@ function guess(anwser) {
     updateHighScore()
 }
 
-function giveTip(type) {
+function giveTip(event ,type) {
+    event.stopPropagation()
     if (!tipGiven) {
         britishController.add("FOUL, STINKING CHEAT!!");
         britishController.add("...")
@@ -450,6 +451,7 @@ class British_Controller {
     hide() {
         narrator.classList.remove("Showing")
         narrator.style.opacity = 0
+        this.clearTimeouts()
         setTimeout(() => {
             narrator.style.display = "none"
         }, 500)
