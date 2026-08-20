@@ -64,6 +64,20 @@ function updateHighScore() {
         if (tipGiven && regenerated && welcomeText) {
             localStorage.setItem("RNGsTutorials", "yup")
         }
+
+        if (streak === 1) {
+            britishController.add("Merely a lucky guess!")
+            britishController.show()
+        } else if (streak === 5) {
+            britishController.add("Merely a luckier guess!")
+            britishController.show()
+        } else if (streak === 10) {
+            britishController.add("Impossible thou must be cheating!!")
+            britishController.show()
+        } else if (streak === 67) {
+            britishController.add("Was it really worth it?")
+            britishController.show()
+        }
     }
 }
 
