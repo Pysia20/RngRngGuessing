@@ -1,9 +1,10 @@
 <div align="center">
-    # RNG Guessing
+    
+# RNG Guessing
 
-    ### A simple web game where you have to guess which RNG generated a number
-    ### Also a Shakespearean narrator's soul got in and refuses to leave
-    $\color{gray} \text{My nameth isth Rouxls thou worms!!}$
+### A simple web game where you have to guess which RNG generated a number
+### Also a Shakespearean narrator's soul got in and refuses to leave
+$\color{gray} \text{My nameth isth Rouxls thou worms!!}$
 
 </div>
 
