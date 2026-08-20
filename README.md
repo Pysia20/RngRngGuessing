@@ -20,6 +20,8 @@ $\color{gray} \text{My nameth isth Rouxls thou worms!!}$
 - Canvas Confetti 1.9.4 by catdad for [REDACTED]
 - And of course HTML, CSS and JavaScript
 
+<br>
+
 ## How to edit or run the project
 ### Simply download the files and well that's about it!
 
@@ -30,6 +32,8 @@ If you do plan to edit it I recommend running this command _(requires npm)_:
 npm install --save canvas-confetti
 ```
 It installs the canvas confetti library and allows your IDE to recognize it properly _(the confetti will work without this though)_
+
+<br>
 
 ## AI Disclosure
 AI was used to help with discovering various things _(ex. How to add a stroke to text)_ and to understand and help with fixing random bugs
