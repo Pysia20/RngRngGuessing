@@ -1,6 +1,8 @@
 <div align="center">
     
 # RNG Guessing
+
+<img src="showcase.gif" alt="showcase gif" width="400">
     
 ### A simple web game where you have to guess which RNG generated a number
 ### Also a Shakespearean narrator's soul got in and refuses to leave
