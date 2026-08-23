@@ -13,6 +13,7 @@ let mouseX = 0
 let mouseY = 0
 let cheated = false
 let britishController = false
+let graphController = false
 let welcomeText = false
 let regenerated = false
 let tipGiven = false
@@ -201,6 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     welcomeText = true
 
+    graphController = new Graph_Controller()
+
     loadData()
     generate()
 })
@@ -238,10 +241,12 @@ function generate() {
             console.log("generate err")
     }
     randOut.innerHTML = num
+    graphController.clear()
 }
 
 function regenerate() {
     cheated = true
+    graphController.addDot()
 
     if (!regenerated) {
         britishController.add("This thingamajig alloweth thee to regenerate the tally using the selfsame fashion.")
@@ -542,5 +547,29 @@ class British_Controller {
 
     changeSpeed(num) {
         this.speed = num
+    }
+}
+
+class Graph_Controller {
+    constructor() {
+        this.canvasGraph = document.getElementById("CanvasGraph")
+        this.ctx = this.canvasGraph.getContext("2d")
+
+        this.previous = 0
+    }
+
+    addDot() {
+        const x = (this.previous / 1000) * this.canvasGraph.width
+        const y = this.canvasGraph.height - ((num / 1000) * this.canvasGraph.height)
+
+        this.ctx.fillStyle = "#000000"
+        this.ctx.fillRect(x, y, 4, 4)
+
+        this.previous = num
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvasGraph.width, this.canvasGraph.height)
+        this.previous = num
     }
 }
