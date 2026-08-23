@@ -43,6 +43,7 @@ const prevDiv = document.getElementById("Prev")
 const narratorText = document.getElementById("NarratorText")
 const typingDiv = document.getElementById("TypingSlider")
 const volumeDiv = document.getElementById("VolumeSlider")
+const canvasGraph = document.getElementById("CanvasGraph")
 
 function loadData() {
     const tempScore = parseInt(localStorage.getItem("RNGsHighScore"))
@@ -146,8 +147,8 @@ function resetProgress() {
     }
 }
 
-function toggleSlider(slider) {
-    switch (slider) {
+function toggleVisibility(opt) {
+    switch (opt) {
         case 0:
             if (volumeDiv.classList.contains("shown")) {
                 volumeDiv.classList.replace("shown", "hidden")
@@ -168,6 +169,13 @@ function toggleSlider(slider) {
                 volumeDiv.classList.replace("hidden", "shown")
             } else {
                 volumeDiv.classList.replace("shown", "hidden")
+            }
+            break
+        case 2:
+            if (canvasGraph.classList.contains("hidden")) {
+                canvasGraph.classList.replace("hidden", "shown")
+            } else {
+                canvasGraph.classList.replace("shown", "hidden")
             }
             break
         default:
@@ -552,15 +560,14 @@ class British_Controller {
 
 class Graph_Controller {
     constructor() {
-        this.canvasGraph = document.getElementById("CanvasGraph")
-        this.ctx = this.canvasGraph.getContext("2d")
+        this.ctx = canvasGraph.getContext("2d")
 
         this.previous = 0
     }
 
     addDot() {
-        const x = (this.previous / 1000) * this.canvasGraph.width
-        const y = this.canvasGraph.height - ((num / 1000) * this.canvasGraph.height)
+        const x = (this.previous / 1000) * canvasGraph.width
+        const y = canvasGraph.height - ((num / 1000) * canvasGraph.height)
 
         this.ctx.fillStyle = "#000000"
         this.ctx.fillRect(x, y, 4, 4)
@@ -569,7 +576,7 @@ class Graph_Controller {
     }
 
     clear() {
-        this.ctx.clearRect(0, 0, this.canvasGraph.width, this.canvasGraph.height)
+        this.ctx.clearRect(0, 0, canvasGraph.width, canvasGraph.height)
         this.previous = num
     }
 }

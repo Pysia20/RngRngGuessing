@@ -23,7 +23,8 @@
         <p id="TheNumber" onclick="regenerate()" title="Regenerate">000</p>
     </div>
     <div class="Graph">
-        <canvas id="CanvasGraph"></canvas>
+        <canvas class="hidden" id="CanvasGraph"></canvas>
+        <p onclick="toggleVisibility(2)">X</p>
     </div>
     <div class="answers">
         <div class="anwser" id="Math" onclick="guess('Math')">
@@ -50,11 +51,11 @@
     <div class="Settings">
         <div class="Setting" title="Change typing speed">
             <div class="Slider hidden" id="TypingSlider"><input type="range" name="typing" id="typingSliderInput" onchange="updateTyping(this.value)" max="2" min="0.5" step="0.05" value="1"></div>
-            <div class="ShowButton"><label for="typingSliderInput" onclick="toggleSlider(0)"><img src="assets/imgs/typing.png" alt="T"></label></div>
+            <div class="ShowButton"><label for="typingSliderInput" onclick="toggleVisibility(0)"><img src="assets/imgs/typing.png" alt="T"></label></div>
         </div>
         <div class="Setting" title="Change volume">
             <div class="Slider hidden" id="VolumeSlider"><input type="range" name="volume" id="volumeSliderInput" onchange="updateVolume(this.value)" max="1" min="0" step="0.01" value="1"></div>
-            <div class="ShowButton"><label for="volumeSliderInput" onclick="toggleSlider(1)"><img src="assets/imgs/speaker3.png" alt="S"></label></div>
+            <div class="ShowButton"><label for="volumeSliderInput" onclick="toggleVisibility(1)"><img src="assets/imgs/speaker3.png" alt="S"></label></div>
         </div>
         <div class="Setting" onclick="resetProgress()" title="Reset Progress"><img src="assets/imgs/trash.png" alt="X"></div>
     </div>
