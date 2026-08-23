@@ -11,6 +11,7 @@ let streak = 0
 let highScore = 0
 let mouseX = 0
 let mouseY = 0
+let cheated = false
 let britishController = false
 let welcomeText = false
 let regenerated = false
@@ -90,14 +91,21 @@ function updateHighScore() {
         if (streak === 1) {
             britishController.add("Merely a lucky guess!")
             britishController.show()
-        } else if (streak === 5) {
+        } else if (streak === 5 && cheated) {
             britishController.add("Merely a luckier guess!")
             britishController.show()
-        } else if (streak === 10) {
+        } else if (streak === 10 && cheated) {
             britishController.add("Impossible thou must be cheating!!")
+            britishController.add("I take my leave of thee!")
             britishController.show()
-        } else if (streak === 67) {
+        } else if (streak === 67 && cheated) {
             britishController.add("Was it really worth it?")
+            britishController.show()
+        } else if (streak === 3 && !cheated) {
+            britishController.add("Thou hast risen in mine eyes.")
+            britishController.show()
+        } else if (streak === 6 && !cheated) {
+            britishController.add("You have won my praise, most noble friend.")
             britishController.show()
         }
     }
@@ -207,6 +215,7 @@ for (const anwser of anwsers) {
 
 function generate() {
     const method = Math.floor(Math.random() * 4) //wait, it's all just math.random?  always has been.
+    cheated = false
 
     switch (method) {
         case 0:
@@ -232,6 +241,8 @@ function generate() {
 }
 
 function regenerate() {
+    cheated = true
+
     if (!regenerated) {
         britishController.add("This thingamajig alloweth thee to regenerate the tally using the selfsame fashion.")
         britishController.add("But why art thou regenerating!?")
