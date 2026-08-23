@@ -42,9 +42,12 @@ const narratorText = document.getElementById("NarratorText")
 const typingDiv = document.getElementById("TypingSlider")
 const volumeDiv = document.getElementById("VolumeSlider")
 
-function loadHighScore() {
+function loadData() {
     const tempScore = parseInt(localStorage.getItem("RNGsHighScore"))
     const didTutorials = localStorage.getItem("RNGsTutorials")
+    const volume = localStorage.getItem("RNGsVolume")
+    const speed = localStorage.getItem("RNGsSpeed")
+
     if (tempScore) {
         highScore = tempScore
     }
@@ -53,17 +56,36 @@ function loadHighScore() {
         regenerated = true
         welcomeText = true
     }
+    if (volume) {
+        typeSound.volume = 0.75 * volume
+        hoverSound.volume = 0.4 * volume
+        clickSound.volume = 0.8 * volume
+        confettiSound.volume = 1.0  * volume
+    }
+    if (speed) {
+        britishController.changeSpeed(100 * speed)
+    }
     highOut.innerHTML = "High-score: " + highScore
+}
+
+function saveData(volume, speed) {
+    if (volume !== -1) {
+        localStorage.setItem("RNGsVolume", volume)
+    } else if (speed !== -1) {
+        localStorage.setItem("RNGsSpeed", speed)
+    }
+
+    localStorage.setItem("RNGsHighScore", highScore)
+    highOut.innerHTML = "High-score: " + highScore
+    if (tipGiven && regenerated && welcomeText) {
+        localStorage.setItem("RNGsTutorials", "yup")
+    }
 }
 
 function updateHighScore() {
     if (streak > highScore) {
         highScore = streak
-        localStorage.setItem("RNGsHighScore", highScore)
-        highOut.innerHTML = "High-score: " + highScore
-        if (tipGiven && regenerated && welcomeText) {
-            localStorage.setItem("RNGsTutorials", "yup")
-        }
+        saveData(-1, -1)
 
         if (streak === 1) {
             britishController.add("Merely a lucky guess!")
@@ -106,6 +128,8 @@ function resetProgress() {
         case 3:
             localStorage.removeItem("RNGsTutorials")
             localStorage.removeItem("RNGsHighScore")
+            localStorage.removeItem("RNGsVolume")
+            localStorage.removeItem("RNGsSpeed")
             location.reload()
             break
         default:
@@ -147,11 +171,13 @@ function updateVolume(volume) {
     hoverSound.volume = 0.4 * volume
     clickSound.volume = 0.8 * volume
     confettiSound.volume = 1.0  * volume
+    saveData(volume, -1)
 }
 
 function updateTyping(speed) {
     speed = 2.25 - speed
     britishController.changeSpeed(100 * speed)
+    saveData(-1, speed)
 }
 
 document.addEventListener('mousemove', (event) => {
@@ -160,14 +186,15 @@ document.addEventListener('mousemove', (event) => {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadHighScore()
-    generate()
     if (!welcomeText) {
         britishController = new British_Controller(["Welcome, THOU UTTER FOOL!", "Thou shalt guess my RNGs!", "NOWTH"])
     } else {
         britishController = new British_Controller(["Welcome back, my little fool!"])
     }
     welcomeText = true
+
+    loadData()
+    generate()
 })
 
 for (const anwser of anwsers) {
