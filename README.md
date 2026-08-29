@@ -14,6 +14,8 @@ $\color{gray} \text{My nameth isth Rouxls thou worms!!}$
 
 </div>
 
+<br>
+
 ## Features
 - FOUR different RNGs
 - Shakespearean narrator that reacts differently based on what you do
