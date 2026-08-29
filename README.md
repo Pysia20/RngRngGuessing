@@ -58,3 +58,20 @@ It installs the canvas confetti library and allows your IDE to recognize it prop
 
 ## AI Disclosure
 AI was used to help with discovering various things _(ex. How to add a stroke to text)_ and to understand and help with fixing random bugs
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<details>
+<summary></summary>
+
+👁️👄👁️
+</details>
