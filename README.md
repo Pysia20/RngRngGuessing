@@ -8,9 +8,23 @@
 ### Also a Shakespearean narrator's soul got in and refuses to leave
 $\color{gray} \text{My nameth isth Rouxls thou worms!!}$
 
+---
+
+### 🎮 [Play it now!](https://rng-guessing.vercel.app) 🎮
+
 </div>
 
----
+## Features
+- FOUR different RNGs
+- Shakespearean narrator that reacts differently based on what you do
+- Sound effects
+- Settings for volume and text speed
+- High-score and Streak
+- High-score and setting saving
+- A graph and regenerate features to help you guess
+- Everything scales (Not exactly phone friendly tho)
+- A link to my main site that doesn't exist (yet)
+- Confetti
 
 ## How it was made
 ### What I used:
@@ -20,7 +34,8 @@ $\color{gray} \text{My nameth isth Rouxls thou worms!!}$
 - Figma for design prototypes
 - Google fonts for... fonts
 - Canvas Confetti 1.9.4 by catdad for [REDACTED]
-- And of course HTML, CSS and JavaScript
+
+And of course HTML, CSS and JavaScript
 
 <br>
 
