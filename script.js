@@ -175,7 +175,10 @@ function toggleVisibility(opt) {
             if (canvasGraph.classList.contains("hidden")) {
                 canvasGraph.classList.replace("hidden", "shown")
             } else {
-                canvasGraph.classList.replace("shown", "hidden")
+                canvasGraph.classList.remove("shown")
+                setTimeout(() => {
+                    canvasGraph.classList.add("hidden")
+                }, 250)
             }
             break
         default:
@@ -234,7 +237,7 @@ function generate() {
             correct = "Math"
             break
         case 1:
-            num = (mouseX * mouseY) % 1000
+            num = Math.floor(((mouseX + mouseY) / (window.innerWidth + window.innerHeight)) * 1000) % 1000;
             correct = "Cursor"
             break
         case 2:
@@ -254,7 +257,6 @@ function generate() {
 
 function regenerate() {
     cheated = true
-    graphController.addDot()
 
     if (!regenerated) {
         britishController.add("This thingamajig alloweth thee to regenerate the tally using the selfsame fashion.")
@@ -268,7 +270,7 @@ function regenerate() {
             num = Math.floor(Math.random() * 1000)
             break
         case "Cursor":
-            num = (mouseX * mouseY) % 1000
+            num = Math.floor(((mouseX + mouseY) / (window.innerWidth + window.innerHeight)) * 1000) % 1000;
             break
         case "Time":
             num = Date.now() % 1000
@@ -280,6 +282,8 @@ function regenerate() {
             console.log("regenerate err")
     }
     randOut.innerHTML = num
+
+    graphController.addDot()
 }
 
 function guess(anwser) {
@@ -316,7 +320,7 @@ function giveTip(event ,type) {
         case "Cursor":
             britishController.add("This one uses the position of your cursor.")
             britishController.add("Position X (left and right): " + mouseX + " and Y (up and down): " + mouseY)
-            britishController.add("It's the easiest one to guess correctly if you just click refresh.")
+            britishController.add("It's the easiest one to guess correctly if you just click regenerate.")
             britishController.show()
             break
         case "Time":
@@ -327,7 +331,7 @@ function giveTip(event ,type) {
             break
         case "Prev":
             britishController.add("This one just uses the previous number.")
-            britishController.add("It's also pretty easy to guess if you use refresh and sometimes even obvious without it.")
+            britishController.add("It's also pretty easy to guess if you use regenerate and sometimes even obvious without it.")
             britishController.show()
             break
         default:
@@ -570,7 +574,7 @@ class Graph_Controller {
         const y = canvasGraph.height - ((num / 1000) * canvasGraph.height)
 
         this.ctx.fillStyle = "#000000"
-        this.ctx.fillRect(x, y, 4, 4)
+        this.ctx.fillRect(x - 2, y - 2, 4, 4)
 
         this.previous = num
     }

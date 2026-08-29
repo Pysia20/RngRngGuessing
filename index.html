@@ -23,8 +23,10 @@
         <p id="TheNumber" onclick="regenerate()" title="Regenerate">000</p>
     </div>
     <div class="Graph">
-        <canvas class="hidden" id="CanvasGraph"></canvas>
-        <p onclick="toggleVisibility(2)">X</p>
+        <canvas class="hidden" id="CanvasGraph" width="300" height="300"></canvas>
+    </div>
+    <div class="GraphToggle">
+        <p onclick="toggleVisibility(2)">\/</p>
     </div>
     <div class="answers">
         <div class="anwser" id="Math" onclick="guess('Math')">
@@ -35,7 +37,7 @@
         <div class="anwser" id="Cursor" onclick="guess('Cursor')">
             <p>Cursor Pos</p>
             <div class="arrow" title="More info"><p onclick="giveTip(event, 'Cursor')">\/</p></div>
-            <div class="code"><p>(mouseX * mouseY) % 1000</p></div>
+            <div class="code"><p>Math.floor(((mouseX+mouseY) / (windowW+windowH)) * 1000) % 1000</p></div>
         </div>
         <div class="anwser" id="Time" onclick="guess('Time')">
             <p>Time Based</p>
@@ -61,7 +63,7 @@
     </div>
     <div class="Links">
         <a href="DoesntExistYetSorry.html" title="My main site"><img src="assets/imgs/exit.png"
-        alt="take me away"></a>
+                                                                     alt="take me away"></a>
     </div>
 </main>
 <script src="script.js"></script>
